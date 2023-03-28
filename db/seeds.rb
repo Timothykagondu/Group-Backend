@@ -5,3 +5,19 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+# db/seeds.rb
+
+# Create some sample users
+User.create!(
+  name: "sundus",
+  email: "john.doe@example.com",
+  password: "123",
+
+)
+
+User.create!(
+  name: "Timothy",
+  email: "jane.smith@example.com",
+  password: "456",
+
+)
