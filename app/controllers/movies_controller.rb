@@ -15,6 +15,16 @@ class MoviesController < ApplicationController
         movie.destroy
         render json: {}, status: :no_content
     end
+
+    def create
+        movie = Movie.create(movie_params) 
+        if movie.valid?
+            render json: movie, status: :created
+        else
+            render json: { errors: ["validation errors"] }, status: :unprocessable_entity
+        end
+    end
+    
     private
     def find_movie
         Movie.find(params[:id])
@@ -22,5 +32,9 @@ class MoviesController < ApplicationController
 
     def render_not_found_response
         render json: { error: "Movie not found" }, status: :not_found
+    end
+
+    def movie_params
+        params.permit(:title, :description, :year, :length, :image_url, :rating)
     end
 end
