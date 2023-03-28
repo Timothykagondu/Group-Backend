@@ -10,6 +10,11 @@ class MoviesController < ApplicationController
         render json: movie, status: :ok
     end
 
+    def destroy
+        movie = find_movie
+        movie.destroy
+        render json: {}, status: :no_content
+    end
     private
     def find_movie
         Movie.find(params[:id])
