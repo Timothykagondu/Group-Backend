@@ -25,6 +25,9 @@ class MoviesController < ApplicationController
         end
     end
     
+    def update
+    end
+    
     private
     def find_movie
         Movie.find(params[:id])
