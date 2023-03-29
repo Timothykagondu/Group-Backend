@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :users, only: [:index, :show, :create]
+# user routes
+ post '/users', to: 'users#signup'
+
 end
 # rails generate model Review user:references movie:references rating:integer comment:text
 # rails db:migrate
