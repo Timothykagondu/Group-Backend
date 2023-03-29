@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+    #rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
     def index
         render json: Movie.all, status: :ok
@@ -7,31 +7,27 @@ class MoviesController < ApplicationController
 
     def show
         movie = find_movie
-        render json: movie, status: :ok
+        response_template( status: :created, data: movie)
     end
 
     def destroy
         movie = find_movie
         movie.destroy
-        render json: {}, status: :no_content
+        response_template(message: 'success', data: { info: 'Movie successfilly deleted!' }, status: 204)
     end
 
     def create
         movie = Movie.create(movie_params) 
         if movie.valid?
-            render json: movie, status: :created
+            response_template(status: :created, data: movie)
         else
-            render json: { errors: ["validation errors"] }, status: :unprocessable_entity
+            response_template(status: :unprocessable_entity, data: movie.errors, message: 'failed')
         end
     end
     
     private
     def find_movie
         Movie.find(params[:id])
-    end
-
-    def render_not_found_response
-        render json: { error: "Movie not found" }, status: :not_found
     end
 
     def movie_params
