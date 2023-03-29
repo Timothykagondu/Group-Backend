@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: [:index, :show, :create]
-    before_action :authorize_user, only: [:index, :show, :create]
-    def index
+   def index
         user = User.all
         render json: user
     end
@@ -20,18 +18,7 @@ class UsersController < ApplicationController
    end
   private
 
-#   def set_user
-#     user = User.find(params[:id])
-#   end
-def authorize_user
-    unless user == current_user
-      render json: { error: 'Not authorized' }, status: :unauthorized
+ def user_params
+        params.permit(:name, :email, :password)
     end
   end
-end
-    def user_params
-        params.permit(:name, :email, :password, :password_confirmation)
-    end
-  
-
-end
