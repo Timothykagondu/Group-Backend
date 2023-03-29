@@ -1,3 +1,3 @@
 class MovieGenreSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :movie_id, :genre_id
 end
