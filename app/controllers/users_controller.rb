@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     def signup
         user = User.create(user_params)
         if user.valid?
+            save_user(user.id)
             response_template(message: 'Registration was successful!', status: :created, data: user)
         else
             response_template(message: 'Error occured during registration', status: :unprocessable_entity, data: user.errors)
@@ -12,7 +13,7 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.permit(:username, :email, :password)
+        params.permit(:name, :email, :password)
     end
     end
     
