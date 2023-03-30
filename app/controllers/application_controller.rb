@@ -12,7 +12,7 @@ class ApplicationController < ActionController::API
 
 
     #delete a uid in session after 8 hrs
-    def remove_user
+    def delete_user_session
         session.delete(:uid)
         session[:expiry] = Time.now
     end

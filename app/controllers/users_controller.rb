@@ -26,6 +26,10 @@ class UsersController < ApplicationController
         end
     end
 
+    def logout
+        delete_user_session
+        response_template(message: "You have successfully logged out")
+    end
     private
     def user_params
         params.permit(:name, :email, :password)
