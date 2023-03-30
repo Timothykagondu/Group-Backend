@@ -7,7 +7,7 @@ class MoviesController < ApplicationController
 
     def show
         movie = find_movie
-        response_template( status: :created, data: movie)
+        render json:  movie, status: :ok
     end
 
     def destroy
