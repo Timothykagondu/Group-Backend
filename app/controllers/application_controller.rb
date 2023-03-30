@@ -5,10 +5,11 @@ class ApplicationController < ActionController::API
         render json: {message: message, data: data}, status: status
     end
 
-    def save_user
+    def save_user(id)
         session[:uid] = id
         session[:expiry] = 8.hours.from_now
     end
+
 
     #delete a uid in session after 8 hrs
     def remove_user
@@ -18,7 +19,7 @@ class ApplicationController < ActionController::API
 
     def session_expired?
         session[:expiry] ||= Time.now
-        time_diff = ((session[:expiry]) - Time.now).to_i
+        time_diff = (Time.parse(session[:expiry]) - Time.now).to_i
         unless time_diff > 0
             response_template(message: 'failed', status: 401, data: { info: "You're session has expired. Please login again to continue"})
         end

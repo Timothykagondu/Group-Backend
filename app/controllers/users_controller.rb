@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     end
 
     def login
-        sql = "username = :username OR email = :email"
+        sql = "name = :name OR email = :email"
         user = User.where(sql, { name: user_params[:name], email: user_params[:email] }).first
         if user&.authenticate(user_params[:password])
             save_user(id: user.id)

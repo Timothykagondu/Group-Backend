@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 # user routes
  post '/users', to: 'users#signup'
- post '/users', to: 'users#login'
+ post '/users/login', to: 'users#login'
  get '/user/login/check', to: 'users#confirm_login_status'
 
 
