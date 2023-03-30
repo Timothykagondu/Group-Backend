@@ -10,7 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_29_073325) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_29_072931) do
+  create_table "genres", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "movie_genres", force: :cascade do |t|
+    t.integer "movie_id", null: false
+    t.integer "genre_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genre_id"], name: "index_movie_genres_on_genre_id"
+    t.index ["movie_id"], name: "index_movie_genres_on_movie_id"
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.integer "year", null: false
+    t.integer "length", null: false
+    t.string "image_url", null: false
+    t.boolean "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "movie_id", null: false
@@ -21,14 +48,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_073325) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
-  create_table "sessions", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.string "token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_sessions_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -37,7 +56,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_073325) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "movie_genres", "genres"
+  add_foreign_key "movie_genres", "movies"
   add_foreign_key "reviews", "movies"
   add_foreign_key "reviews", "users"
-  add_foreign_key "sessions", "users"
 end
