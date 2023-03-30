@@ -7,7 +7,7 @@ class MoviesController < ApplicationController
 
     def show
         movie = find_movie
-        response_template( status: :created, data: movie)
+        render json:  movie, status: :ok
     end
 
     def destroy
@@ -23,6 +23,20 @@ class MoviesController < ApplicationController
         else
             response_template(status: :unprocessable_entity, data: movie.errors, message: 'failed')
         end
+    end
+    
+    #update likes
+    def like
+        movie = find_movie
+        movie.update(rating: true)
+        redirect_to movie
+      end
+    
+    #update likes
+    def dislike
+        movie = find_movie
+        movie.update(rating: false)
+        redirect_to movie
     end
     
     private
