@@ -25,7 +25,18 @@ class MoviesController < ApplicationController
         end
     end
     
-    def update
+    #update likes
+    def like
+        movie = find_movie
+        movie.update(rating: true)
+        redirect_to movie
+      end
+    
+    #update likes
+    def dislike
+        movie = find_movie
+        movie.update(rating: false)
+        redirect_to movie
     end
     
     private
