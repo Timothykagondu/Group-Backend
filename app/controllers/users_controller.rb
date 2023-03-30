@@ -1,13 +1,18 @@
 class UsersController < ApplicationController
-    # before_action :session_expired?, only: [:check_login_status]
+    before_action :session_expired?, only: [:check_login_status]
 
     def signup
         user = User.create(user_params)
         if user.valid?
+            save_user(id: user.id)
             response_template(message: 'Registration was successful!', status: :created, data: user)
         else
             response_template(message: 'Error occured during registration', status: :unprocessable_entity, data: user.errors)
         end
+    end
+
+    def confirm_login_status
+        response_template(message: 'Success', status: :ok)
     end
 
     def login
