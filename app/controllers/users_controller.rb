@@ -1,37 +1,38 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: [:index, :show, :create]
-    before_action :authorize_user, only: [:index, :show, :create]
-    def index
-        user = User.all
-        render json: user
-    end
+    before_action :session_expired?, only: [:confirm_login_status]
 
-    def show 
-        user = User.find(params[:id])
-        render json: user
-    end
-    def create
+    def signup
         user = User.create(user_params)
-        if user
-            render json: user, status: :created
+        if user.valid?
+            save_user(id: user.id)
+            response_template(message: 'Registration was successful!', status: :created, data: user)
         else
-            render json: {error: "User not found"}, status: :unprocessable_entity
+            response_template(message: 'Error occured during registration', status: :unprocessable_entity, data: user.errors)
         end
-   end
-  private
-
-#   def set_user
-#     user = User.find(params[:id])
-#   end
-def authorize_user
-    unless user == current_user
-      render json: { error: 'Not authorized' }, status: :unauthorized
     end
-  end
-end
+
+    def confirm_login_status
+        response_template(message: 'Success', status: :ok)
+    end
+
+    def login
+        sql = "name = :name OR email = :email"
+        user = User.where(sql, { name: user_params[:name], email: user_params[:email] }).first
+        if user&.authenticate(user_params[:password])
+            save_user(id: user.id)
+            response_template(message: 'Login was successful', status: :ok, data: user)
+        else
+            response_template(message: 'Invalid username/email or password', status: :unauthorized)
+        end
+    end
+
+    def logout
+        delete_user_session
+        response_template(message: "You have successfully logged out")
+    end
+    private
     def user_params
-        params.permit(:name, :email, :password, :password_confirmation)
+        params.permit(:name, :email, :password)
     end
-  
-
-end
+    end
+    
