@@ -1,24 +1,28 @@
 class ReviewsController < ApplicationController
+
+  def index
+    movie = Movie.find(params[:movie_id])
+    reviews = movie.reviews
+    render json: reviews
+  end
+
   def create
-      review = Review.new(review_params)
-      if review.save
+    movie = Movie.find(params[:movie_id])
+    review = current_user.reviews.build(review_params)
+    review.movie = movie
+    if review.save
         render json: review, status: :created
-      else
-        render json: review.errors, status: :unprocessable_entity
-      end
+    else
+        render json: {errors: review.errors.full_messages }, status: :unprocessable_entity
     end
+  end
  
   
-    def destroy
-      review.destroy
-      head :no_content
-    end
   
-    private
-    
-    def review_params
+  private
+  def review_params
       params.permit(:user_id, :movie_id, :comment)
-    end
+  end
  
   end
   

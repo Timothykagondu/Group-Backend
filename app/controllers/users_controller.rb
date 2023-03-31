@@ -30,6 +30,12 @@ class UsersController < ApplicationController
         delete_user_session
         response_template(message: "You have successfully logged out")
     end
+
+    def deactivate
+        current_user.destroy
+        response_template(message: "Your account has been deleted.")
+    end
+
     private
     def user_params
         params.permit(:name, :email, :password)
