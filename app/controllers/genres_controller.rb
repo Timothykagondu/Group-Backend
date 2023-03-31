@@ -7,8 +7,10 @@ class GenresController < ApplicationController
 
     def show
         genre = find_genre
-        response_template( status: :created, data: genre)
+        movies = genre.movies
+        response_template( status: :created, data: movies), include: :genres
     end
+       
 
     private
     def find_genre
