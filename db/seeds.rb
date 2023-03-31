@@ -10,11 +10,8 @@ puts "Seeding Movies, grab your popcorn...🍿🍿"
 
 #users
 User.create!(name: "sundus",  email: "sundus@gmail.com",  password: "sundus")
-User.create!(name: "timothy", email: "timothy@example.com", password: "timothy")
-
-#reviews
-Review.create!(user_id: 1, movie_id: 1, comment: 'This is a great movie!')
-Review.create!(user_id: 2, movie_id: 2, comment: 'One of the best movies of all time.')
+User.create!(name: "timothy", email: "timothy@gmail.com", password: "timothy")
+User.create!(name: "sumeya", email: "sumeya@gmail.com", password: "sumeya")
 
 #movies
 Movie.create(title: "Captain America: The Winter Soldier", description: "Steve Rogers teams up with Natasha Romanoff, aka Black Widow, to stop a new threat from old history: an assassin known as the Winter Soldier.", year: 2014, length: 136, image_url: "https://www.imdb.com/title/tt1843866/mediaviewer/rm297853184/", rating: true)
@@ -88,4 +85,21 @@ movie_genres.each do |movie_genre|
     end
 end
 
-puts "Done! Enjoy 🎥"
+#reviews
+reviews = [
+  { user_id: 2, movie_id: 2, comment: 'One of the best movies of all time.'},
+  { user_id: 1, movie_id: 1, comment: 'This is a great movie!'},
+  { user_id: 1, movie_id: 8, comment: 'One of my favorite movies ever!' },
+  { user_id: 1, movie_id: 5, comment: 'I can watch this movie over and over again.' },
+  { user_id: 2, movie_id: 2, comment: 'A must-watch for anyone who loves action movies.' },
+  { user_id: 1, movie_id: 10, comment: 'The plot twists in this movie kept me on the edge of my seat.' },
+  { user_id: 2, movie_id: 3, comment: 'The soundtrack for this movie is amazing.' }
+]
+
+reviews.each do |review|
+    Review.create!(review)
+end
+
+
+
+puts "Done! Lights, Camera, Action! 🎥"
