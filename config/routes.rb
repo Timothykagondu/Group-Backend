@@ -1,12 +1,22 @@
 Rails.application.routes.draw do
-  resources :genres, only: [:index, :show]
-  resources :movies
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
-  resources :users, eonly: [:index, :show, :create]
+  #movies
+  resources :movies do
+    put 'like', to: 'movies#like', on: :member
+    put 'dislike', to: 'movies#dislike', on: :member
+  end
+
+  resources :movie_genres, only: [:create]
+
+  #users
+  post '/users', to: 'users#signup'
+  post '/users/login', to: 'users#login'
+  get '/user/login/check', to: 'users#confirm_login_status'
+  delete '/users/logout', to: 'users#logout'
+
+  #genres
+  resources :genres, only: [:index, :show]
+  get '/genres', to: 'genres#index'
+  get '/genres/:id/movies', to: 'genres#show'
+
 end
-# rails generate model Review user:references movie:references rating:integer comment:text
-# rails db:migrate
-# rails generate resource Review user:references movie:references rating:integer comment:text
