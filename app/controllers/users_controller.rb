@@ -35,7 +35,7 @@ class UsersController < ApplicationController
         current_user.destroy
         response_template(message: "Your account has been deleted.")
     end
-
+    
     private
     def user_params
         params.permit(:name, :email, :password)
