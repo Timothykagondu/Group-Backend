@@ -49,9 +49,43 @@ Genre.create(name: "Comedy", description: "Films that are intended to be humorou
 Genre.create(name: "Drama", description: "Films that are serious in tone and often focus on realistic characters and emotional themes.")
 Genre.create(name: "Horror", description: "Films that are designed to scare, shock, and unsettle the audience.")
 Genre.create(name: "Science Fiction", description: "Films that explore speculative or imaginative concepts, such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life.")
-Genre.create(name: 'Drama', description: 'A genre that focuses on realistic characters and emotional themes.')
 Genre.create(name: 'Thriller', description: 'A genre that creates intense feelings of suspense, excitement, and anxiety.')
 Genre.create(name: 'Fantasy', description: 'A genre that typically involves supernatural or magical elements, and often takes place in imaginary worlds or alternate realities.')
 Genre.create(name: "Animation", description: "Films and TV shows featuring animated characters and scenes.")
+Genre.create(name: "Romance", description: "A genre wherein the plot revolves around the love between two protagonists.")
+Genre.create(name: "Musical", description: "A movie genre in which several songs sung by the characters are linked into the story line.")
+
+#movie_genres
+movie_genres = [
+    { movie_id: 1, genre_ids: [1, 5, 6] },
+    { movie_id: 2, genre_ids: [1, 3, 5] },
+    { movie_id: 3, genre_ids: [2] },
+    { movie_id: 4, genre_ids: [5, 6] },
+    { movie_id: 5, genre_ids: [3, 9] },
+    { movie_id: 6, genre_ids: [1, 5, 7] },
+    { movie_id: 7, genre_ids: [7, 8] },
+    { movie_id: 8, genre_ids: [4] },
+    { movie_id: 9, genre_ids: [1, 2, 5] },
+    { movie_id: 10, genre_ids: [1, 5] },
+    { movie_id: 11, genre_ids: [1, 5, 6] },
+    { movie_id: 12, genre_ids: [1, 7, 8] },
+    { movie_id: 13, genre_ids: [3] },
+    { movie_id: 14, genre_ids: [4, 6] },
+    { movie_id: 15, genre_ids: [3] },
+    { movie_id: 16, genre_ids: [3] },
+    { movie_id: 17, genre_ids: [1, 3] },
+    { movie_id: 18, genre_ids: [3, 2, 9] },
+    { movie_id: 19, genre_ids: [3] },
+    { movie_id: 20, genre_ids: [3, 9, 10] },
+    { movie_id: 21, genre_ids: [1, 5, 6] },
+    { movie_id: 22, genre_ids: [8, 3] },
+    { movie_id: 23, genre_ids: [3, 5, 9] }
+]
+
+movie_genres.each do |movie_genre|
+    movie_genre[:genre_ids].each do |genre_id|
+        MovieGenre.create(movie_id: movie_genre[:movie_id], genre_id: genre_id)
+    end
+end
 
 puts "Done! Enjoy 🎥"
