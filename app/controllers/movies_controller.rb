@@ -7,7 +7,8 @@ class MoviesController < ApplicationController
 
     def show
         movie = find_movie
-        render json:  movie, status: :ok
+        reviews = movie.reviews
+        render json: { movie: movie, reviews: reviews }, status: :ok
     end
 
     def destroy
