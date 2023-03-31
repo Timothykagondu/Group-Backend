@@ -18,7 +18,9 @@ class MoviesController < ApplicationController
     end
 
     def create
+        genre = Genre.find(params[:genre_id])
         movie = Movie.create(movie_params) 
+        movie.genres << genre
         if movie.valid?
             response_template(status: :created, data: movie)
         else

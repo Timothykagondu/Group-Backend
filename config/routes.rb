@@ -16,7 +16,6 @@ Rails.application.routes.draw do
 
   #genres
   resources :genres, only: [:index, :show]
-  get '/genres', to: 'genres#index'
   get '/genres/:id/movies', to: 'genres#show'
 
 end
