@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
 
+  #skip_before_action :verify_authenticity_token
+
   def index
     movie = Movie.find(params[:movie_id])
     reviews = movie.reviews
