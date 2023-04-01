@@ -1,14 +1,15 @@
 class MoviesController < ApplicationController
     #rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
+    skip_before_action :verify_authenticity_token
     def index
         render json: Movie.all, status: :ok
     end
 
     def show
         movie = find_movie
-        reviews = movie.reviews
-        render json: { movie: movie, reviews: reviews }, status: :ok
+        reviews = movie.reviews.as_json(except: [:created_at, :updated_at])
+        render json: { movie: movie.as_json(except: [:created_at, :updated_at]), reviews: reviews }, status: :ok
     end
 
     def destroy
