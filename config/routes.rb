@@ -19,10 +19,12 @@ Rails.application.routes.draw do
   get '/user/login/check', to: 'users#confirm_login_status'
   delete '/users/logout', to: 'users#logout'
   delete 'users/deactivate', to: 'users#deactivate'
-
+ get 'users', to: 'users#index'
 
   #reviews
   get '/movies/:movie_id/reviews', to: 'reviews#index'
   post '/movies/:movie_id/reviews', to: 'reviews#create'
+  patch '/users/:user_id/reviews/:id', to: 'reviews#update'
+  delete '/users/:user_id/reviews/:id', to: 'reviews#destroy'
 
 end

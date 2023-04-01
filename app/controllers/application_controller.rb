@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::Base
     include ActionController::Cookies
+    protect_from_forgery with: :null_session
     #skip_before_action :verify_authenticity_token, only: [:signup]
 
-    #rescue_from StandardError, with: :standard_error
+    rescue_from StandardError, with: :standard_error
 
 
     def response_template(message: 'success', status: 200, data: nil, **options)
