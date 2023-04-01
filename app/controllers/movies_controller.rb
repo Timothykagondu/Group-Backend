@@ -15,7 +15,7 @@ class MoviesController < ApplicationController
     def destroy
         movie = find_movie
         movie.destroy
-        response_template(message: 'success', data: { info: 'Movie successfilly deleted!' }, status: 204)
+        response_template(message: 'success', data: { info: 'Movie successfully deleted!' }, status: 204)
     end
 
     def create
@@ -26,6 +26,15 @@ class MoviesController < ApplicationController
             response_template(status: :created, data: movie)
         else
             response_template(status: :unprocessable_entity, data: movie.errors, message: 'failed')
+        end
+    end
+
+    def update
+        movie = Movie.find(params[:id])
+        if movie.update(movie_params)
+          response_template(message: 'Movie successfully updated', data: movie)
+        else
+          response_template(status: :unprocessable_entity, data: movie.errors, message: 'Failed to update movie')
         end
     end
     
