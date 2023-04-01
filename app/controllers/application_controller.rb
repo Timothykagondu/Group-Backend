@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
     rescue_from StandardError, with: :standard_error
 
 
-    def response_template(message: 'success', status: 200, data: nil)
-        render json: {message: message, data: data}, status: status
+    def response_template(message: 'success', status: 200, data: nil, **options)
+        render json: { message: message, data: data }.merge(options), status: status
     end
 
     def save_user(id)
