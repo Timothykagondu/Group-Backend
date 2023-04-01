@@ -10,16 +10,18 @@ Rails.application.routes.draw do
     put 'dislike', to: 'movies#dislike', on: :member
   end
 
-  #movie-genres
+  #movie-genres(personal-use)
   resources :movie_genres, only: [:create]
 
   #users
   post '/users', to: 'users#signup'
   post '/users/login', to: 'users#login'
-  get '/user/login/check', to: 'users#confirm_login_status'
   delete '/users/logout', to: 'users#logout'
   delete 'users/deactivate', to: 'users#deactivate'
- get 'users', to: 'users#index'
+  
+  #(personal-use)
+  get '/user/login/check', to: 'users#confirm_login_status'
+  get 'users', to: 'users#index'
 
   #reviews
   get '/movies/:movie_id/reviews', to: 'reviews#index'
