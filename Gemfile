@@ -45,6 +45,8 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.18'
 
 gem 'active_model_serializers'
 
+gem 'rack-cors', require: 'rack/cors'
+
 
 # Use Sass to process CSS
 # gem "sassc-rails"

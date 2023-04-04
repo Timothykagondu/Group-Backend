@@ -135,7 +135,6 @@ This repository is distributed under the MIT License
 
 ## Author
 This repository is created by:
-https://github.com/Timothykagondu
 
 - [Timothy Kagondu](https://github.com/Timothykagondu) 
 
